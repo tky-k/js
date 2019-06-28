@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+        <script src="js/vue.js"></script>
+        <link rel="stylesheet" href="css/postit.css" />
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </head>
+
+    <body class="bg_color">
+        <div id="postit_manager" class="container-fluid sidenav">
+            <div class="row">
+                <div class="sideposition sidenav col-sm-6">
+                    <button type="button" @click="add_component" class="btn btn-info">メモ追加</button>
+                    <div class="row sideposition" v-for="postit in postits" v-if="postit.type == 1" draggable="true"
+                        @dragover.prevent @dragstart="dragstart(postit,1)"
+                        @dragover="dragover(postit)">
+                        <div><textarea rows="3" cols="30" class="form-control" v-model="postit.val"></textarea></div>
+                    </div>
+                </div>
+            </div>
+            <div id="trash" class="trash_box" @dragover.prevent @drop="drop()" @dragover.prevent
+            @dragstart="dragstart(null,0)">
+                <img v-bind:src='image' />
+            </div>
+        </div>
+
+    </body>
+    <script src="js/postit.js"></script>
+</html>
